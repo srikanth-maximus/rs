@@ -9,23 +9,29 @@ def DOCKER_IMAGE = docker_image
 
 def DOCKER_TAG
 
+def GIT_BRANCH
+/*
 def GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
 
 def isDevPush = GIT_BRANCH == "dev"
 def isTestPush = GIT_BRANCH == "test"
 def isProdPush = GIT_BRANCH == "master"
+*/
 
 node {
   try {
     deleteDir()
 
     stage("Initialize") {
-      GIT_BRANCH = GIT_BRANCH.replace("origin/", "")
+      /* GIT_BRANCH = GIT_BRANCH.replace("origin/", "")
       git(
         url: "${REPO_URL}",
         credentialsId: 'git-login',
         branch: "${GIT_BRANCH}"
       )
+      */
+      checkout scm
+      GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
       currentBuild.setDisplayName("${GIT_BRANCH}-${BUILD_NUMBER}")
       DOCKER_TAG = "${BUILD_TIMESTAMP}-${GIT_BRANCH}".replace(" ", "_").replace(":","-")
     }
