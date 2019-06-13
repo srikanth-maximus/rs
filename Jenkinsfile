@@ -5,7 +5,6 @@ def docker_image = "records-service"
 
 def REPO_URL = repo_url 
 def DOCKER_IMAGE = docker_image
-def SONAR_URL = sonar_url
 // **********  ********** **********  end inputs  ********** ********** ********** //
 
 def DOCKER_TAG
