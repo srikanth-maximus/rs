@@ -1,4 +1,0 @@
-
-server:
-  servlet:
-    contextPath: /records-service
