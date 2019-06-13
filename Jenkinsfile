@@ -9,9 +9,9 @@ def DOCKER_IMAGE = docker_image
 
 def DOCKER_TAG
 
-def isDevPush = GIT_BRANCH == "dev" 
-def isCiPush = GIT_BRANCH == "test"
-def isMasterPush = GIT_BRANCH == "master"
+def isDevPush = GIT_BRANCH == "dev"
+def isTestPush = GIT_BRANCH == "test"
+def isProdPush = GIT_BRANCH == "master"
 
 node {
   try {
@@ -51,10 +51,10 @@ node {
       }
     }
 
-    if (isMasterPush) {
+    if (isProdPush) {
       print "Deploy to production"
     }
-    else if(isCiPush) {
+    else if(isTestPush) {
       print "Deploy to test"
     }
     else if(isDevPush) {
