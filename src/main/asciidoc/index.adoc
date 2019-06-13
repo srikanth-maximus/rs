@@ -1,0 +1,10 @@
+= DateTime API Documentation
+
+== Introduction
+This API contains methods to deal with Dates and Times.
+
+== Date Time API
+Collection of  API endpoints used to manipulate persons registered in the application.
+
+=== Get Current Date in default timezone
+
