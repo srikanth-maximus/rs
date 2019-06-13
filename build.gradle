@@ -1,14 +1,16 @@
 plugins {
 	id 'org.asciidoctor.convert' version '1.5.3'
 	id 'org.springframework.boot' version '2.1.5.RELEASE'
+	id 'org.sonarqube' version '2.7'
 	id 'java'
+	id 'jacoco'
 }
 
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.maximus.tc'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '1.11'
 
 configurations {
 	developmentOnly
@@ -22,6 +24,18 @@ configurations {
 
 repositories {
 	mavenCentral()
+	jcenter()
+}
+
+sourceSets {
+  seleniumTest {
+    java {
+      compileClasspath += sourceSets.main.output + sourceSets.test.output
+      runtimeClasspath += sourceSets.main.output + sourceSets.test.output
+      srcDir file('src/selenium-test/java')
+    }
+    resources.srcDir file('src/selenium-test/resources')
+  }
 }
 
 ext {
@@ -40,7 +54,19 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+  compile group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version: '3.141.59'
 }
+
+jacocoTestReport {
+  reports {
+    xml.enabled true
+    csv.enabled false
+    html.destination file("${buildDir}/jacocoHtml")
+  }
+}
+
+test.finalizedBy jacocoTestReport
 
 dependencyManagement {
 	imports {
