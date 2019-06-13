@@ -12,4 +12,5 @@ public class RecordsServiceApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
+
 }
