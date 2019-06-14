@@ -1,5 +1,5 @@
 @Library('jenkins-gradle-pipeline') _
 
-maven-pipeline {
+gradle-pipeline {
   project_name = "records-service"
 }
