@@ -37,6 +37,6 @@ public class SeleniumTest {
     @Test
     public void test() {
         driver.get(baseURL);
-        assertTrue(driver.getPageSource().contains("Hello World - 05/16/2019"));
+        assertTrue(driver.getPageSource().contains("Hello World!"));
     }
 }
